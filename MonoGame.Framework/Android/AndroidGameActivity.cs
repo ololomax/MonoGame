@@ -7,11 +7,12 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
+using AndroidX.AppCompat.App;
 
 namespace Microsoft.Xna.Framework
 {
 	[CLSCompliant(false)]
-    public class AndroidGameActivity : Activity
+    public class AndroidGameActivity : AppCompatActivity
     {
         internal Game Game { private get; set; }
 
