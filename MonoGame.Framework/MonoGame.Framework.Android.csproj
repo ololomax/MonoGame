@@ -751,6 +751,7 @@
     <Compile Include="Resources\Resource.Designer.cs">
       <Platforms>Android,Ouya</Platforms>
     </Compile>
+    <Compile Include="Graphics\SwappyGL.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
@@ -790,6 +791,22 @@
     <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\openal-soft\libs\x86_64\libopenal32.so">
       <Platforms>Android</Platforms>
       <Link>libs\x86_64\libopenal32.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\arm64-v8a\libswappy.so">
+      <Platforms>Android</Platforms>
+      <Link>libs\arm64-v8a\libswappy.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\armeabi-v7a\libswappy.so">
+      <Platforms>Android</Platforms>
+      <Link>libs\armeabi-v7a\libswappy.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86\libswappy.so">
+      <Platforms>Android</Platforms>
+      <Link>libs\x86\libswappy.so</Link>
+    </EmbeddedNativeLibrary>
+    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86_64\libswappy.so">
+      <Platforms>Android</Platforms>
+      <Link>libs\x86_64\libswappy.so</Link>
     </EmbeddedNativeLibrary>
   </ItemGroup>
   <ItemGroup />

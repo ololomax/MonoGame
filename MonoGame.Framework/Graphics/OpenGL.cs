@@ -1098,6 +1098,14 @@ namespace MonoGame.OpenGL
         internal delegate void VertexAttribDivisorDelegate (int location, int frequency);
         internal static VertexAttribDivisorDelegate VertexAttribDivisor;
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate IntPtr d_eglgetcurrentdisplay();
+        internal static d_eglgetcurrentdisplay GetCurrenDisplay;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate IntPtr d_eglgetcurrentsurface(int readdraw);
+        internal static d_eglgetcurrentsurface GetCurrentSurface;
+
 #if DEBUG
         [UnmanagedFunctionPointer (CallingConvention.StdCall)]
         delegate void DebugMessageCallbackProc (int source, int type, int id, int severity, int length, IntPtr message, IntPtr userParam);
@@ -1251,6 +1259,9 @@ namespace MonoGame.OpenGL
             DeleteBuffers = LoadFunction<DeleteBuffersDelegate> ("glDeleteBuffers");
 
             VertexAttribPointer = LoadFunction<VertexAttribPointerDelegate> ("glVertexAttribPointer");
+
+            GetCurrenDisplay = FuncLoader.LoadFunction<d_eglgetcurrentdisplay>(libEgl, "eglGetCurrentDisplay");
+            GetCurrentSurface = FuncLoader.LoadFunction<d_eglgetcurrentsurface>(libEgl, "eglGetCurrentSurface");
 
             // Instanced drawing requires GL 3.2 or up, if the either of the following entry points can not be loaded
             // this will get flagged by setting SupportsInstancing in GraphicsCapabilities to false.

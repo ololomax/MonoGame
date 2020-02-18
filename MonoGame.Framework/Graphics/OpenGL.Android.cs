@@ -25,6 +25,8 @@ namespace MonoGame.OpenGL
         public static IntPtr libES3 = FuncLoader.LoadLibrary("libGLESv3.so");
         public static IntPtr libGL = FuncLoader.LoadLibrary("libGL.so");
 
+        public static IntPtr libEgl = FuncLoader.LoadLibrary("libEGL.so");
+
         static partial void LoadPlatformEntryPoints()
         {
             Android.Util.Log.Verbose("GL", "Loading Entry Points");

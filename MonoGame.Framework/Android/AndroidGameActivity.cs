@@ -6,8 +6,10 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Runtime;
 using Android.Views;
 using AndroidX.AppCompat.App;
+using MonoGame.OpenGL;
 
 namespace Microsoft.Xna.Framework
 {
@@ -45,7 +47,11 @@ namespace Microsoft.Xna.Framework
             _orientationListener = new OrientationListener(this);
 
 			Game.Activity = this;
-		}
+
+            SwappyGL.Init(JNIEnv.Handle, Handle);
+            SwappyGL.SetAutoSwapInterval(true);
+            SwappyGL.SetUseAffinity(true);
+        }
 
         public static event EventHandler Paused;
 

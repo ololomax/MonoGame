@@ -15,6 +15,7 @@ using Javax.Microedition.Khronos.Egl;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using MonoGame.OpenGL;
 
 namespace Microsoft.Xna.Framework
 {
@@ -35,6 +36,9 @@ namespace Microsoft.Xna.Framework
 
             ForceRecreateSurface, // also used to create the surface the 1st time or when screen orientation changes
         }
+
+        IntPtr eglDisplayNative;
+        IntPtr eglSurfaceNative;
 
         bool disposed = false;
         ISurfaceHolder mHolder;
@@ -141,7 +145,8 @@ namespace Microsoft.Xna.Framework
         public virtual void SwapBuffers()
         {
             EnsureUndisposed();
-            if (!egl.EglSwapBuffers(eglDisplay, eglSurface))
+
+            if (!SwappyGL.SwapBuffers(eglDisplayNative, eglSurfaceNative))//if (!egl.EglSwapBuffers(eglDisplay, eglSurface))
             {
                 if (egl.EglGetError() == 0)
                 {
@@ -1023,6 +1028,9 @@ namespace Microsoft.Xna.Framework
 
                     if (MonoGame.OpenGL.GL.GetError == null)
                         MonoGame.OpenGL.GL.LoadEntryPoints();
+
+                    eglDisplayNative = GL.GetCurrenDisplay();
+                    eglSurfaceNative = GL.GetCurrentSurface(EGL10.EglDraw);
                 }
                 catch (Exception ex)
                 {
