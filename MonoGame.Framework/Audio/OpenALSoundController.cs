@@ -235,7 +235,7 @@ namespace Microsoft.Xna.Framework.Audio
                     0
                 };
 #elif IOS
-                AVAudioSession.SharedInstance().Init();
+                //AVAudioSession.SharedInstance().Init();
 
                 // This is the default audio session category on iOS.
                 //
@@ -245,7 +245,7 @@ namespace Microsoft.Xna.Framework.Audio
                 //   interrupt any other audio sessions which are also nonmixable.
                 //
                 //
-                AVAudioSession.SharedInstance().SetCategory(AVAudioSessionCategory.SoloAmbient);
+                //AVAudioSession.SharedInstance().SetCategory(AVAudioSessionCategory.SoloAmbient);
 
                 EventHandler<AVAudioSessionInterruptionEventArgs> handler = delegate(object sender, AVAudioSessionInterruptionEventArgs e) {
                     switch (e.InterruptionType)
@@ -266,7 +266,7 @@ namespace Microsoft.Xna.Framework.Audio
                 AVAudioSession.Notifications.ObserveInterruption(handler);
 
                 // Activate the instance or else the interruption handler will not be called.
-                AVAudioSession.SharedInstance().SetActive(true);
+                //AVAudioSession.SharedInstance().SetActive(true);
 
                 int[] attribute = new int[0];
 #else
