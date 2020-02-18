@@ -154,7 +154,7 @@ namespace Microsoft.Xna.Framework
         {
             get
             {
-                return _platform.Game.graphicsDeviceManager.IsFullScreen ? UIRectEdge.All : base.PreferredScreenEdgesDeferringSystemGestures;
+                return /*_platform.Game.graphicsDeviceManager.IsFullScreen ? UIRectEdge.All :*/ base.PreferredScreenEdgesDeferringSystemGestures;
             }
         }
 
