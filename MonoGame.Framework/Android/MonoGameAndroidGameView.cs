@@ -146,7 +146,9 @@ namespace Microsoft.Xna.Framework
         {
             EnsureUndisposed();
 
-            if (!SwappyGL.SwapBuffers(eglDisplayNative, eglSurfaceNative))//if (!egl.EglSwapBuffers(eglDisplay, eglSurface))
+            bool swapResult = Game.Activity.SwappyGLEnabled ? SwappyGL.SwapBuffers(eglDisplayNative, eglSurfaceNative) : egl.EglSwapBuffers(eglDisplay, eglSurface);
+
+            if (!swapResult)
             {
                 if (egl.EglGetError() == 0)
                 {

@@ -22,7 +22,8 @@ namespace Microsoft.Xna.Framework
         private OrientationListener _orientationListener;
 
         public bool AutoPauseAndResumeMediaPlayer = true;
-        public bool RenderOnUIThread = true; 
+        public bool RenderOnUIThread = true;
+        public bool SwappyGLEnabled = false;
 
 		/// <summary>
 		/// OnCreate called when the activity is launched from cold or after the app
@@ -48,9 +49,17 @@ namespace Microsoft.Xna.Framework
 
 			Game.Activity = this;
 
-            SwappyGL.Init(JNIEnv.Handle, Handle);
-            SwappyGL.SetAutoSwapInterval(true);
-            SwappyGL.SetUseAffinity(true);
+            try
+            {
+                SwappyGL.Init(JNIEnv.Handle, Handle);
+                SwappyGL.SetAutoSwapInterval(true);
+                SwappyGL.SetUseAffinity(true);
+                SwappyGLEnabled = SwappyGL.IsEnabled();
+            }
+            catch (Exception e)
+            {
+                SwappyGLEnabled = false;
+            }
         }
 
         public static event EventHandler Paused;
