@@ -1259,9 +1259,10 @@ namespace MonoGame.OpenGL
             DeleteBuffers = LoadFunction<DeleteBuffersDelegate> ("glDeleteBuffers");
 
             VertexAttribPointer = LoadFunction<VertexAttribPointerDelegate> ("glVertexAttribPointer");
-
+#if __ANDROID__
             GetCurrenDisplay = FuncLoader.LoadFunction<d_eglgetcurrentdisplay>(libEgl, "eglGetCurrentDisplay");
             GetCurrentSurface = FuncLoader.LoadFunction<d_eglgetcurrentsurface>(libEgl, "eglGetCurrentSurface");
+#endif
 
             // Instanced drawing requires GL 3.2 or up, if the either of the following entry points can not be loaded
             // this will get flagged by setting SupportsInstancing in GraphicsCapabilities to false.
