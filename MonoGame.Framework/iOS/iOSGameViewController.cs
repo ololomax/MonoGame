@@ -11,7 +11,12 @@ using CoreGraphics;
 
 namespace Microsoft.Xna.Framework
 {
-    class iOSGameViewController : 
+    public sealed class ThemeChangedEventArgs : EventArgs
+    {
+        public long Theme { get; internal set; }
+    }
+
+    public class iOSGameViewController : 
     #if TVOS
         GameController.GCEventViewController
     #else
@@ -34,6 +39,7 @@ namespace Microsoft.Xna.Framework
         }
 
         public event EventHandler<EventArgs> InterfaceOrientationChanged;
+        public event EventHandler<ThemeChangedEventArgs> ThemeChanged;
 
         public DisplayOrientation SupportedOrientations { get; set; }
 
@@ -113,7 +119,15 @@ namespace Microsoft.Xna.Framework
         }
         #endregion
 
+        public override void TraitCollectionDidChange(UITraitCollection previousTraitCollection)
+        {
+            base.TraitCollectionDidChange(previousTraitCollection);
 
+            if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0) && TraitCollection.UserInterfaceStyle != previousTraitCollection.UserInterfaceStyle)
+            {
+                EventHelpers.Raise(this, ThemeChanged, new ThemeChangedEventArgs() { Theme = (long)TraitCollection.UserInterfaceStyle });
+            }
+        }
 
 
         #region iOS 8 or newer

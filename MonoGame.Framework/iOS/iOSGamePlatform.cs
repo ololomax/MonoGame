@@ -84,7 +84,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Microsoft.Xna.Framework
 {
-    class iOSGamePlatform : GamePlatform
+    public class iOSGamePlatform : GamePlatform
     {
         private iOSGameViewController _viewController;
         private UIWindow _mainWindow;
