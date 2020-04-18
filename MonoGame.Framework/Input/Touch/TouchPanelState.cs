@@ -236,7 +236,7 @@ namespace Microsoft.Xna.Framework.Input.Touch
         /// This will release all touch locations.  It should only be 
         /// called on platforms where touch state is reset all at once.
         /// </summary>
-        internal void ReleaseAllTouches()
+        public void ReleaseAllTouches()
         {
             var mostToRemove = Math.Max(_touchState.Count, _gestureState.Count);
             if (mostToRemove > 0)
