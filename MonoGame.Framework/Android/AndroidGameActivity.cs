@@ -105,6 +105,8 @@ namespace Microsoft.Xna.Framework
             if (Game != null)
                 Game.Dispose();
             Game = null;
+            if (SwappyGLEnabled)
+                SwappyGL.Destroy();
 			base.OnDestroy ();
 		}
     }

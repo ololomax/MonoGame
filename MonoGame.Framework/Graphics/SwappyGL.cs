@@ -78,5 +78,10 @@ namespace MonoGame.OpenGL
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         internal delegate void d_swappygl_setautopipelinemode(bool enabled);
         internal static d_swappygl_setautopipelinemode SetAutoPipelineMode = FuncLoader.LoadFunction<d_swappygl_setautopipelinemode>(NativeLibrary, "SwappyGL_setAutoPipelineMode");
+
+        //bool SwappyGL_setWindow(ANativeWindow* window);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate bool d_swappygl_setWindow(IntPtr window);
+        internal static d_swappygl_setWindow SetWindow = FuncLoader.LoadFunction<d_swappygl_setWindow>(NativeLibrary, "SwappyGL_setWindow");
     }
 }
