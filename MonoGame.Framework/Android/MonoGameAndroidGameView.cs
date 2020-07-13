@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
@@ -40,7 +39,6 @@ namespace Microsoft.Xna.Framework
 
         IntPtr eglDisplayNative;
         IntPtr eglSurfaceNative;
-        IntPtr aNativeWindow = IntPtr.Zero;
 
         bool disposed = false;
         ISurfaceHolder mHolder;
@@ -98,15 +96,6 @@ namespace Microsoft.Xna.Framework
             Init();
         }
 
-        void AcquireNativeWindow(ISurfaceHolder holder)
-        {
-            if (aNativeWindow != IntPtr.Zero)
-                NativeMethods.ANativeWindow_release(aNativeWindow);
-
-            aNativeWindow = NativeMethods.ANativeWindow_fromSurface(Java.Interop.JniEnvironment.EnvironmentPointer, Holder.Surface.Handle);
-            //NativeWindowAcquired();
-        }
-
         private void Init()
         {
             // default
@@ -136,8 +125,6 @@ namespace Microsoft.Xna.Framework
             lock (_lockObject)
             {
                 androidSurfaceAvailable = true;
-				if (Game.Activity.SwappyGLEnabled)
-                	AcquireNativeWindow(holder);
             }
         }
 
@@ -146,14 +133,6 @@ namespace Microsoft.Xna.Framework
             lock (_lockObject)
             {
                 androidSurfaceAvailable = false;
-                
-                if (Game.Activity.SwappyGLEnabled)
-                {
-                	if (aNativeWindow != IntPtr.Zero)
-                    	NativeMethods.ANativeWindow_release(aNativeWindow);
-
-                	aNativeWindow = IntPtr.Zero;
-                }
             }
         }
 
@@ -1044,9 +1023,6 @@ namespace Microsoft.Xna.Framework
 
                     glSurfaceAvailable = true;
 
-                    if (Game.Activity.SwappyGLEnabled)
-                        SwappyGL.SetWindow(aNativeWindow);
-
                     // Must set viewport after creation, the viewport has correct values in it already as we call it, but
                     // the surface is created after the correct viewport is already applied so we must do it again.
                     if (_game.GraphicsDevice != null)
@@ -1326,17 +1302,6 @@ namespace Microsoft.Xna.Framework
                 view.ClearCurrent();
                 view.egl.EglMakeCurrent(view.eglDisplay, surface, surface, eglContext);
             }
-        }
-
-        internal static class NativeMethods
-        {
-            const string AndroidRuntimeLibrary = "android";
-
-            [DllImport(AndroidRuntimeLibrary)]
-            internal static unsafe extern IntPtr ANativeWindow_fromSurface(IntPtr jniEnv, IntPtr handle);
-
-            [DllImport(AndroidRuntimeLibrary)]
-            internal static unsafe extern void ANativeWindow_release(IntPtr window);
         }
     }
 }
