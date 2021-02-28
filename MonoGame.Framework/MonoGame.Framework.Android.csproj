@@ -125,6 +125,7 @@
     <Compile Include="Platform\Android\OrientationListener.cs" />
     <Compile Include="Platform\Android\ResumeManager.cs" />
     <Compile Include="Platform\Android\ScreenReceiver.cs" />
+    <Compile Include="Platform\Android\SwappyGL.cs" />
     <Compile Include="Platform\GamePlatform.Mobile.cs" />
     <Compile Include="Platform\Graphics\GraphicsAdapter.Legacy.cs" />
     <Compile Include="Platform\Graphics\OpenGL.Android.cs" />
@@ -150,8 +151,6 @@
     
     <Compile Include="..\ThirdParty\StbImageSharp\src\StbImageSharp\**\*.cs" LinkBase="Utilities\StbImageSharp"/>
     <Compile Include="..\ThirdParty\StbImageWriteSharp\src\StbImageWriteSharp\**\*.cs" LinkBase="Utilities\StbImageWriteSharp"/>
-
-    <Compile Include="Graphics\SwappyGL.cs" />
   </ItemGroup>
 
   <ItemGroup>

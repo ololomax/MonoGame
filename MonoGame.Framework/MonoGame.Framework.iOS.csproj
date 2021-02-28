@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Xamarin.iOS" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
 
