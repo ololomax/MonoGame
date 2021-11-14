@@ -971,6 +971,8 @@ namespace Microsoft.Xna.Framework.Graphics
 
         public IndexBuffer Indices { set { SetIndexBuffer(value); } get { return _indexBuffer; } }
 
+        public bool IsUintElementsAvailable { get { return GraphicsCapabilities.SupportsElementIndexUint; } }
+
         internal Shader VertexShader
         {
             get { return _vertexShader; }

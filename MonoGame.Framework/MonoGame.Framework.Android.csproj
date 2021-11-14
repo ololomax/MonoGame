@@ -1,7 +1,6 @@
-<Project Sdk="MSBuild.Sdk.Extras">
-
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Migration.1.0.6.1\build\monoandroid90\Xamarin.AndroidX.Migration.props" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Migration.1.0.6.1\build\monoandroid90\Xamarin.AndroidX.Migration.props')" />
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="MSBuild.Sdk.Extras">
+  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Migration.1.0.8\build\monoandroid90\Xamarin.AndroidX.Migration.props" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Migration.1.0.8\build\monoandroid90\Xamarin.AndroidX.Migration.props')" />
   <PropertyGroup>
     <TargetFramework>monoandroid90</TargetFramework>
     <DefineConstants>ANDROID;GLES;STBSHARP_INTERNAL</DefineConstants>
@@ -18,79 +17,12 @@
     <Reference Include="Xamarin.AndroidX.MultiDex">
       <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.MultiDex.2.0.1.1\lib\monoandroid90\Xamarin.AndroidX.MultiDex.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Core" />
     <Reference Include="Java.Interop" />
-    <Reference Include="Xamarin.AndroidX.Annotation">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Annotation.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.Annotation.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Arch.Core.Common">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Arch.Core.Common.2.1.0.1\lib\monoandroid90\Xamarin.AndroidX.Arch.Core.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Arch.Core.Runtime">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Arch.Core.Runtime.2.1.0.1\lib\monoandroid90\Xamarin.AndroidX.Arch.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Collection">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Collection.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.Collection.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.CursorAdapter">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.CursorAdapter.1.0.0.1\lib\monoandroid90\Xamarin.AndroidX.CursorAdapter.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Interpolator">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Interpolator.1.0.0.1\lib\monoandroid90\Xamarin.AndroidX.Interpolator.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Lifecycle.Common">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.Common.2.2.0.1\lib\monoandroid90\Xamarin.AndroidX.Lifecycle.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.LiveData.Core.2.2.0.1\lib\monoandroid90\Xamarin.AndroidX.Lifecycle.LiveData.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Lifecycle.Runtime">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.Runtime.2.2.0.1\lib\monoandroid90\Xamarin.AndroidX.Lifecycle.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Lifecycle.ViewModel">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.ViewModel.2.2.0.1\lib\monoandroid90\Xamarin.AndroidX.Lifecycle.ViewModel.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.SavedState">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.SavedState.1.0.0.1\lib\monoandroid90\Xamarin.AndroidX.SavedState.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.VersionedParcelable">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.VersionedParcelable.1.1.1.1\lib\monoandroid90\Xamarin.AndroidX.VersionedParcelable.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Core">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Core.1.2.0.1\lib\monoandroid90\Xamarin.AndroidX.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Activity">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Activity.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.Activity.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.CustomView">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.CustomView.1.0.0.1\lib\monoandroid90\Xamarin.AndroidX.CustomView.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.DrawerLayout">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.DrawerLayout.1.0.0.1\lib\monoandroid90\Xamarin.AndroidX.DrawerLayout.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Loader">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Loader.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.Loader.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.VectorDrawable">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.VectorDrawable.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.VectorDrawable.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.VectorDrawable.Animated">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.VectorDrawable.Animated.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.VectorDrawable.Animated.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.ViewPager">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.ViewPager.1.0.0.1\lib\monoandroid90\Xamarin.AndroidX.ViewPager.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Fragment">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Fragment.1.2.4.1\lib\monoandroid90\Xamarin.AndroidX.Fragment.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.AppCompat">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.AppCompat.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.AppCompat.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.Lifecycle.ViewModelSavedState">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.ViewModelSavedState.2.2.0.1\lib\monoandroid90\Xamarin.AndroidX.Lifecycle.ViewModelSavedState.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.AndroidX.AppCompat.AppCompatResources">
-      <HintPath>..\..\cube-monogame\packages\Xamarin.AndroidX.AppCompat.AppCompatResources.1.1.0.1\lib\monoandroid90\Xamarin.AndroidX.AppCompat.AppCompatResources.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -187,34 +119,106 @@
       <Link>libs\x86_64\libswappy.so</Link>
     </EmbeddedNativeLibrary>
   </ItemGroup>
-
   <Import Project="Platform\OpenGL.targets" />
   <Import Project="Platform\OpenAL.targets" />
   <Import Project="Platform\Microsoft.Devices.Sensors.targets" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.MultiDex.2.0.1.1\build\monoandroid90\Xamarin.AndroidX.MultiDex.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.MultiDex.2.0.1.1\build\monoandroid90\Xamarin.AndroidX.MultiDex.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Annotation.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Annotation.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Annotation.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Annotation.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Arch.Core.Common.2.1.0.1\build\monoandroid90\Xamarin.AndroidX.Arch.Core.Common.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Arch.Core.Common.2.1.0.1\build\monoandroid90\Xamarin.AndroidX.Arch.Core.Common.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Arch.Core.Runtime.2.1.0.1\build\monoandroid90\Xamarin.AndroidX.Arch.Core.Runtime.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Arch.Core.Runtime.2.1.0.1\build\monoandroid90\Xamarin.AndroidX.Arch.Core.Runtime.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Collection.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Collection.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Collection.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Collection.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.CursorAdapter.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.CursorAdapter.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.CursorAdapter.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.CursorAdapter.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Interpolator.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.Interpolator.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Interpolator.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.Interpolator.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.SavedState.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.SavedState.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.SavedState.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.SavedState.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.CustomView.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.CustomView.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.CustomView.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.CustomView.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.DrawerLayout.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.DrawerLayout.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.DrawerLayout.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.DrawerLayout.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Loader.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Loader.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Loader.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Loader.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.VectorDrawable.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.VectorDrawable.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.VectorDrawable.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.VectorDrawable.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.VectorDrawable.Animated.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.VectorDrawable.Animated.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.VectorDrawable.Animated.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.VectorDrawable.Animated.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.AppCompat.AppCompatResources.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.AppCompat.AppCompatResources.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.AppCompat.AppCompatResources.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.AppCompat.AppCompatResources.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.ViewPager.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.ViewPager.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.ViewPager.1.0.0.1\build\monoandroid90\Xamarin.AndroidX.ViewPager.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.AppCompat.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.AppCompat.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.AppCompat.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.AppCompat.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Migration.1.0.6.1\build\monoandroid90\Xamarin.AndroidX.Migration.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Migration.1.0.6.1\build\monoandroid90\Xamarin.AndroidX.Migration.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.Common.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.Common.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.Common.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.Common.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.LiveData.Core.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.LiveData.Core.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.LiveData.Core.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.LiveData.Core.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.Runtime.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.Runtime.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.Runtime.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.Runtime.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.ViewModel.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.ViewModel.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.ViewModel.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.ViewModel.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.ViewModelSavedState.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.ViewModelSavedState.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Lifecycle.ViewModelSavedState.2.2.0.1\build\monoandroid90\Xamarin.AndroidX.Lifecycle.ViewModelSavedState.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.VersionedParcelable.1.1.1.1\build\monoandroid90\Xamarin.AndroidX.VersionedParcelable.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.VersionedParcelable.1.1.1.1\build\monoandroid90\Xamarin.AndroidX.VersionedParcelable.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Core.1.2.0.1\build\monoandroid90\Xamarin.AndroidX.Core.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Core.1.2.0.1\build\monoandroid90\Xamarin.AndroidX.Core.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Activity.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Activity.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Activity.1.1.0.1\build\monoandroid90\Xamarin.AndroidX.Activity.targets')" />
-  <Import Project="..\..\cube-monogame\packages\Xamarin.AndroidX.Fragment.1.2.4.1\build\monoandroid90\Xamarin.AndroidX.Fragment.targets" Condition="Exists('..\..\cube-monogame\packages\Xamarin.AndroidX.Fragment.1.2.4.1\build\monoandroid90\Xamarin.AndroidX.Fragment.targets')" />
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.MultiDex">
+      <Version>2.0.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Annotation">
+      <Version>1.2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Common">
+      <Version>2.1.0.9</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Runtime">
+      <Version>2.1.0.9</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Collection">
+      <Version>1.1.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.CursorAdapter">
+      <Version>1.0.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Interpolator">
+      <Version>1.0.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Common">
+      <Version>2.3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core">
+      <Version>2.3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime">
+      <Version>2.3.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel">
+      <Version>2.3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.SavedState">
+      <Version>1.1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.VersionedParcelable">
+      <Version>1.1.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Core">
+      <Version>1.6.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Activity">
+      <Version>1.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.CustomView">
+      <Version>1.1.0.7</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.DrawerLayout">
+      <Version>1.1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Loader">
+      <Version>1.1.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.VectorDrawable">
+      <Version>1.1.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.VectorDrawable.Animated">
+      <Version>1.1.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.ViewPager">
+      <Version>1.0.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Fragment">
+      <Version>1.3.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat">
+      <Version>1.3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources">
+      <Version>1.3.1.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <PropertyGroup>
+    <_PostBuildHookTimestamp>@(IntermediateAssembly-&gt;'%(FullPath).timestamp')</_PostBuildHookTimestamp>
+    <_PostBuildHookHostPlatform>$(Platform)</_PostBuildHookHostPlatform>
+  </PropertyGroup>
+  <Target Name="PostBuildHooks" Inputs="@(IntermediateAssembly);@(ReferencePath)" Outputs="@(IntermediateAssembly);$(_PostBuildHookTimestamp)" AfterTargets="CoreCompile" BeforeTargets="AfterCompile">
+    <Touch Files="$(_PostBuildHookTimestamp)" AlwaysCreate="True" />
+  </Target>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(TargetFrameworkVersion)' != 'v4.0' And '$(TargetFrameworkVersion)' != 'v3.5' And '$(TargetFrameworkVersion)' != 'v3.0' And '$(TargetFrameworkVersion)' != 'v2.0' ">$(DefineConstants);NET45</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="80" TabsToSpaces="True" scope="text/x-csharp" />
+          <CSharpFormattingPolicy IndentBlock="True" IndentBraces="False" IndentSwitchSection="True" IndentSwitchCaseSection="True" LabelPositioning="OneLess" NewLinesForBracesInTypes="True" NewLinesForBracesInMethods="True" NewLinesForBracesInProperties="True" NewLinesForBracesInAccessors="True" NewLinesForBracesInAnonymousMethods="True" NewLinesForBracesInControlBlocks="True" NewLinesForBracesInAnonymousTypes="True" NewLinesForBracesInObjectCollectionArrayInitializers="True" NewLinesForBracesInLambdaExpressionBody="True" NewLineForElse="True" NewLineForCatch="True" NewLineForFinally="True" NewLineForMembersInObjectInit="True" NewLineForMembersInAnonymousTypes="True" NewLineForClausesInQuery="True" SpacingAfterMethodDeclarationName="False" SpaceWithinMethodDeclarationParenthesis="False" SpaceBetweenEmptyMethodDeclarationParentheses="False" SpaceAfterMethodCallName="False" SpaceWithinMethodCallParentheses="False" SpaceBetweenEmptyMethodCallParentheses="False" SpaceAfterControlFlowStatementKeyword="True" SpaceWithinExpressionParentheses="False" SpaceWithinCastParentheses="False" SpaceWithinOtherParentheses="False" SpaceAfterCast="False" SpacesIgnoreAroundVariableDeclaration="False" SpaceBeforeOpenSquareBracket="False" SpaceBetweenEmptySquareBrackets="False" SpaceWithinSquareBrackets="False" SpaceAfterColonInBaseTypeDeclaration="True" SpaceAfterComma="True" SpaceAfterDot="False" SpaceAfterSemicolonsInForStatement="True" SpaceBeforeColonInBaseTypeDeclaration="True" SpaceBeforeComma="False" SpaceBeforeDot="False" SpaceBeforeSemicolonsInForStatement="False" SpacingAroundBinaryOperator="Single" WrappingPreserveSingleLine="True" WrappingKeepStatementsOnSingleLine="True" scope="text/x-csharp" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

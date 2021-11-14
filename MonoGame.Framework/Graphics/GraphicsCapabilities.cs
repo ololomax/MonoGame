@@ -36,6 +36,8 @@ namespace Microsoft.Xna.Framework.Graphics
 
         internal bool SupportsDepthNonLinear { get; private set; }
 
+        internal bool SupportsElementIndexUint { get; private set; }
+
         /// <summary>
         /// Gets the support for DXT1
         /// </summary>
