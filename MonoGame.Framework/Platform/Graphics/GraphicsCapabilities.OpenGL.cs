@@ -49,7 +49,7 @@ namespace Microsoft.Xna.Framework.Graphics
 			SupportsPackedDepthStencil = GL.Extensions.Contains("GL_OES_packed_depth_stencil");
 			SupportsDepthNonLinear = GL.Extensions.Contains("GL_NV_depth_nonlinear");
             SupportsTextureMaxLevel = GL.Extensions.Contains("GL_APPLE_texture_max_level");
-            SupportsElementIndexUint = GL.Extensions.Contains("GL_OES_element_index_uint");
+            SupportsElementIndexUint = GL.Extensions.Contains("GL_OES_element_index_uint") || device.glMajorVersion >= 3;
 #else
             SupportsDepth24 = true;
             SupportsPackedDepthStencil = true;
