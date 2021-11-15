@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Java.Interop;
 using Javax.Microedition.Khronos.Egl;
-using MonoGame.Utilities;
+using MonoGame.Framework.Utilities;
 
 namespace MonoGame.OpenGL
 {
