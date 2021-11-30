@@ -43,6 +43,14 @@ namespace Microsoft.Xna.Framework
 
         public DisplayOrientation SupportedOrientations { get; set; }
 
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+
+            UIEdgeInsets insets = View.SafeAreaInsets;
+            Console.WriteLine(insets.ToString());
+        }
+
         public override void LoadView()
         {
 			CGRect frame;
@@ -115,7 +123,7 @@ namespace Microsoft.Xna.Framework
         #region Hide statusbar for iOS 7 or newer
         public override bool PrefersStatusBarHidden()
         {
-            return _platform.Game.graphicsDeviceManager.IsFullScreen;
+            return true;//_platform.Game.graphicsDeviceManager.IsFullScreen;
         }
         #endregion
 
