@@ -43,14 +43,6 @@ namespace Microsoft.Xna.Framework
 
         public DisplayOrientation SupportedOrientations { get; set; }
 
-        public override void ViewDidLayoutSubviews()
-        {
-            base.ViewDidLayoutSubviews();
-
-            UIEdgeInsets insets = View.SafeAreaInsets;
-            Console.WriteLine(insets.ToString());
-        }
-
         public override void LoadView()
         {
 			CGRect frame;
