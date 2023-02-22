@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-android</TargetFramework>
+    <TargetFramework>net7.0-android33.0</TargetFramework>
     <DefineConstants>ANDROID;GLES;STBSHARP_INTERNAL</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <MGOpenGL>GLES</MGOpenGL>
@@ -113,8 +113,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
-    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.4.0" />
-    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.8.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.5.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.9.0.2" />
   </ItemGroup>
   <Import Project="Platform\OpenGL.targets" />
   <Import Project="Platform\OpenAL.targets" />
