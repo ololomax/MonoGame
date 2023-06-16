@@ -139,9 +139,14 @@ namespace Microsoft.Xna.Framework {
                 return DisplayOrientation.LandscapeLeft;
                 #else
 				var orientation = OrientationConverter.ToDisplayOrientation(_viewController.InterfaceOrientation);
-				if ((orientation == DisplayOrientation.LandscapeLeft || orientation == DisplayOrientation.LandscapeRight) &&
+
+				if (_viewController.View == null || _viewController.View.Window == null || _viewController.View.Window.Screen == null)
+                    return orientation;
+
+                if ((orientation == DisplayOrientation.LandscapeLeft || orientation == DisplayOrientation.LandscapeRight) &&
 					(_viewController.View.Frame.Width != _viewController.View.Window.Screen.Bounds.Width || _viewController.View.Frame.Height != _viewController.View.Window.Screen.Bounds.Height))
 					orientation = DisplayOrientation.Portrait;
+
 				return orientation;
 				#endif
 			}
