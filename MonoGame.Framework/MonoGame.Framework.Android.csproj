@@ -119,7 +119,7 @@
     </EmbeddedNativeLibrary>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.5" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.6" />
   </ItemGroup>
   <Import Project="Platform\OpenGL.targets" />
   <Import Project="Platform\OpenAL.targets" />
