@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
@@ -88,6 +89,19 @@ namespace Microsoft.Xna.Framework
 
         public bool IsResuming { get; private set; }
 
+        public bool SwappyGLEnabled = false;
+        internal const string HelperLibraryName = "NativeHelper";
+
+        private static void LoadHelperLibrary()
+        {
+            Java.Lang.JavaSystem.LoadLibrary(HelperLibraryName);
+        }
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_MyMathFuncsAdd")] // test
+        public static extern int MyMathFuncsAdd(IntPtr env, IntPtr thiz, int a, int b);
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_GetNativeWindow")]
+        public static extern IntPtr GetNativeWindow(IntPtr env, IntPtr thiz, IntPtr surface);
+
         public MonoGameAndroidGameView(Context context, AndroidGameWindow gameWindow, Game game)
             : base(context)
         {
@@ -104,6 +118,20 @@ namespace Microsoft.Xna.Framework
             // Add callback to get the SurfaceCreated etc events
             mHolder.AddCallback(this);
             mHolder.SetType(SurfaceType.Gpu);
+
+            try
+            {
+                LoadHelperLibrary();
+
+                SwappyGL.Init(JNIEnv.Handle, Game.Activity.Handle);
+                //SwappyGL.SetAutoSwapInterval(true);
+                //SwappyGL.SetAutoPipelineMode(true);
+                SwappyGLEnabled = SwappyGL.IsEnabled();
+            }
+            catch (System.Exception e)
+            {
+                SwappyGLEnabled = false;
+            }
         }
 
         public void SurfaceChanged(ISurfaceHolder holder, global::Android.Graphics.Format format, int width, int height)
@@ -151,7 +179,7 @@ namespace Microsoft.Xna.Framework
         {
             EnsureUndisposed();
 
-            bool swapResult = Game.Activity.SwappyGLEnabled ? SwappyGL.SwapBuffers(eglDisplayNative, eglSurfaceNative) : egl.EglSwapBuffers(eglDisplay, eglSurface);
+            bool swapResult = SwappyGLEnabled ? SwappyGL.SwapBuffers(eglDisplayNative, eglSurfaceNative) : egl.EglSwapBuffers(eglDisplay, eglSurface);
 
             if (!swapResult)
             {
@@ -1058,6 +1086,24 @@ namespace Microsoft.Xna.Framework
 
                     if (!egl.EglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext))
                         throw new Exception("Could not make EGL current" + GetErrorAsString());
+
+                    if (SwappyGLEnabled)
+                    {
+                        try
+                        {
+                            //int c = MyMathFuncsAdd(JNIEnv.Handle, System.IntPtr.Zero, 3, 2); // test
+
+                            var surface = Java.Interop.JniEnvironment.References.NewReturnToJniRef(this.Holder.Surface);
+                            IntPtr window = GetNativeWindow(JNIEnv.Handle, System.IntPtr.Zero, surface);
+                            bool result = SwappyGL.SetWindow(window);
+                            if (result)
+                                SwappyGL.SetAutoSwapInterval(true);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
 
                     glSurfaceAvailable = true;
 

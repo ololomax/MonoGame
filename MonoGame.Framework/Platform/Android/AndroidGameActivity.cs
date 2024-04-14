@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using AndroidX.AppCompat.App;
-using MonoGame.OpenGL;
 
 namespace Microsoft.Xna.Framework
 {
@@ -23,16 +22,15 @@ namespace Microsoft.Xna.Framework
 
         public bool AutoPauseAndResumeMediaPlayer = true;
         public bool RenderOnUIThread = true;
-        public bool SwappyGLEnabled = false;
 
-		/// <summary>
-		/// OnCreate called when the activity is launched from cold or after the app
-		/// has been killed due to a higher priority app needing the memory
-		/// </summary>
-		/// <param name='savedInstanceState'>
-		/// Saved instance state.
-		/// </param>
-		protected override void OnCreate (Bundle savedInstanceState)
+        /// <summary>
+        /// OnCreate called when the activity is launched from cold or after the app
+        /// has been killed due to a higher priority app needing the memory
+        /// </summary>
+        /// <param name='savedInstanceState'>
+        /// Saved instance state.
+        /// </param>
+        protected override void OnCreate (Bundle savedInstanceState)
 		{
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
@@ -48,18 +46,6 @@ namespace Microsoft.Xna.Framework
             _orientationListener = new OrientationListener(this);
 
 			Game.Activity = this;
-
-            try
-            {
-                SwappyGL.Init(JNIEnv.Handle, Handle);
-                SwappyGL.SetAutoSwapInterval(true);
-                SwappyGL.SetUseAffinity(true);
-                SwappyGLEnabled = SwappyGL.IsEnabled();
-            }
-            catch (Exception e)
-            {
-                SwappyGLEnabled = false;
-            }
         }
 
         public static event EventHandler Paused;

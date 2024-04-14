@@ -7,11 +7,11 @@ using MonoGame.Framework.Utilities;
 
 namespace MonoGame.OpenGL
 {
-    internal static class SwappyGL
+    internal class SwappyGL
     {
         internal static IntPtr NativeLibrary = GetNativeLibrary();
 
-        internal static IntPtr GetNativeLibrary()
+        private static IntPtr GetNativeLibrary()
         {
             var ret = FuncLoader.LoadLibrary("libswappy.so");
 
@@ -49,8 +49,17 @@ namespace MonoGame.OpenGL
         //* @see SwappyGL_init
         //void SwappyGL_destroy();
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        internal delegate bool d_swappygl_destroy();
+        internal delegate void d_swappygl_destroy();
         internal static d_swappygl_destroy Destroy = FuncLoader.LoadFunction<d_swappygl_destroy>(NativeLibrary, "SwappyGL_destroy");
+
+        //* @brief Tell Swappy which ANativeWindow to use when calling to ANativeWindow_*
+        //* API.
+        //* @param window ANativeWindow that was used to create the EGLSurface.
+        //* @return true on success, false if Swappy was not initialized.
+        //bool SwappyGL_setWindow(ANativeWindow* window);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate bool d_swappygl_setwindow(IntPtr window);
+        internal static d_swappygl_setwindow SetWindow = FuncLoader.LoadFunction<d_swappygl_setwindow>(NativeLibrary, "SwappyGL_setWindow");
 
         //* @brief Replace calls to eglSwapBuffers with this. Swappy will wait for the previous frame's
         //* buffer to be processed by the GPU before actually calling eglSwapBuffers.
@@ -68,6 +77,41 @@ namespace MonoGame.OpenGL
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         internal delegate void d_swappygl_setswapintervalns(ulong swap_ns);
         internal static d_swappygl_setswapintervalns SetSwapInterval = FuncLoader.LoadFunction<d_swappygl_setswapintervalns>(NativeLibrary, "SwappyGL_setSwapIntervalNS");
+
+        //void SwappyGL_setFenceTimeoutNS(uint64_t fence_timeout_ns);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate void d_swappygl_setfencetimeoutns(ulong fence_timeout_ns);
+        internal static d_swappygl_setfencetimeoutns SetFenceTimeoutNS = FuncLoader.LoadFunction<d_swappygl_setfencetimeoutns>(NativeLibrary, "SwappyGL_setFenceTimeoutNS");
+
+        //uint64_t SwappyGL_getRefreshPeriodNanos();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate ulong d_swappygl_getrefreshperiodnanos();
+        internal static d_swappygl_getrefreshperiodnanos GetRefreshPeriodNanos = FuncLoader.LoadFunction<d_swappygl_getrefreshperiodnanos>(NativeLibrary, "SwappyGL_getRefreshPeriodNanos");
+
+        //uint64_t SwappyGL_getSwapIntervalNS();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate ulong d_swappygl_getswapintervalns();
+        internal static d_swappygl_getswapintervalns GetSwapIntervalNS = FuncLoader.LoadFunction<d_swappygl_getswapintervalns>(NativeLibrary, "SwappyGL_getSwapIntervalNS");
+
+        //bool SwappyGL_getUseAffinity();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate bool d_swappygl_getuseaffinity();
+        internal static d_swappygl_getuseaffinity GetUseAffinity = FuncLoader.LoadFunction<d_swappygl_getuseaffinity>(NativeLibrary, "SwappyGL_getUseAffinity");
+
+        //uint64_t SwappyGL_getFenceTimeoutNS();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate ulong d_swappygl_getfencetimeoutns();
+        internal static d_swappygl_getfencetimeoutns GetFenceTimeoutNS = FuncLoader.LoadFunction<d_swappygl_getfencetimeoutns>(NativeLibrary, "SwappyGL_getFenceTimeoutNS");
+
+        //void SwappyGL_setBufferStuffingFixWait(int32_t n_frames);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate void d_swappygl_setbufferstuffingfixwait(int n_frames);
+        internal static d_swappygl_setbufferstuffingfixwait SetBufferStuffingFixWait = FuncLoader.LoadFunction<d_swappygl_setbufferstuffingfixwait>(NativeLibrary, "SwappyGL_setBufferStuffingFixWait");
+
+        //int SwappyGL_getSupportedRefreshPeriodsNS(uint64_t *out_refreshrates, int allocated_entries);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate int d_swappygl_getsupportedrefreshperiodsns(IntPtr out_refreshrates, int allocated_entries);
+        internal static d_swappygl_getsupportedrefreshperiodsns GetSupportedRefreshPeriodsNS = FuncLoader.LoadFunction<d_swappygl_getsupportedrefreshperiodsns>(NativeLibrary, "SwappyGL_getSupportedRefreshPeriodsNS");
 
         //void SwappyGL_setAutoSwapInterval(bool enabled);
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

@@ -102,22 +102,41 @@
     <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\openal-soft\libs\x86_64\libopenal32.so">
       <Link>libs\x86_64\libopenal32.so</Link>
     </EmbeddedNativeLibrary>
+
     <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\arm64-v8a\libswappy.so">
-      <Platforms>Android</Platforms>
       <Link>libs\arm64-v8a\libswappy.so</Link>
     </EmbeddedNativeLibrary>
     <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\armeabi-v7a\libswappy.so">
-      <Platforms>Android</Platforms>
       <Link>libs\armeabi-v7a\libswappy.so</Link>
     </EmbeddedNativeLibrary>
     <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86\libswappy.so">
-      <Platforms>Android</Platforms>
       <Link>libs\x86\libswappy.so</Link>
     </EmbeddedNativeLibrary>
     <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86_64\libswappy.so">
-      <Platforms>Android</Platforms>
       <Link>libs\x86_64\libswappy.so</Link>
     </EmbeddedNativeLibrary>
+
+    <AndroidNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\arm64-v8a\libNativeHelper.so">
+      <Link>libs\arm64-v8a\libNativeHelper.so</Link>
+      <ABI>arm64-v8a</ABI>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\armeabi-v7a\libNativeHelper.so">
+      <Link>libs\armeabi-v7a\libNativeHelper.so</Link>
+      <ABI>armeabi-v7a</ABI>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86\libNativeHelper.so">
+      <Link>libs\x86\libNativeHelper.so</Link>
+      <ABI>x86</ABI>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86_64\libNativeHelper.so">
+      <Link>libs\x86_64\libNativeHelper.so</Link>
+      <ABI>x86_64</ABI>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidNativeLibrary>
+
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.6" />
