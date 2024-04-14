@@ -17,7 +17,7 @@ namespace MonoGame.OpenGL
 
             if (ret == IntPtr.Zero)
             {
-                var appFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var appFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 var appDir = Path.GetDirectoryName(appFilesDir);
                 var lib = Path.Combine(appDir, "lib", "libswappy.so");
 
@@ -32,10 +32,10 @@ namespace MonoGame.OpenGL
         //* @param jactivity The activity where Swappy is used
         //* @return false if Swappy failed to initialize.
         //* @see SwappyGL_destroy
-        //static inline bool SwappyGL_init(JNIEnv* env, jobject jactivity);
+        //bool SwappyGL_init(JNIEnv* env, jobject jactivity);
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        internal delegate bool d_swappygl_init_internal(IntPtr env, IntPtr jactivity);
-        internal static d_swappygl_init_internal Init = FuncLoader.LoadFunction<d_swappygl_init_internal>(NativeLibrary, "SwappyGL_init_internal");
+        internal delegate bool d_swappygl_init(IntPtr env, IntPtr jactivity);
+        internal static d_swappygl_init Init = FuncLoader.LoadFunction<d_swappygl_init>(NativeLibrary, "SwappyGL_init");
 
         //* @brief Check if Swappy was successfully initialized.
         //* @return false if either the `swappy.disable` system property is not `false`

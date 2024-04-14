@@ -209,7 +209,7 @@ namespace MonoGame.OpenAL
 
             if (ret == IntPtr.Zero)
             {
-                var appFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var appFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 var appDir = Path.GetDirectoryName(appFilesDir);
                 var lib = Path.Combine(appDir, "lib", "libopenal32.so");
 
