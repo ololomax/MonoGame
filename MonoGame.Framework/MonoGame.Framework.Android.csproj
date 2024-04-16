@@ -56,7 +56,6 @@
     <Compile Include="Platform\Android\OrientationListener.cs" />
     <Compile Include="Platform\Android\ResumeManager.cs" />
     <Compile Include="Platform\Android\ScreenReceiver.cs" />
-    <Compile Include="Platform\Android\SwappyGL.cs" />
     <Compile Include="Platform\Audio\Xact\WaveBank.Default.cs" />
     <Compile Include="Platform\GamePlatform.Mobile.cs" />
     <Compile Include="Platform\Graphics\GraphicsAdapter.Legacy.cs" />
@@ -101,19 +100,6 @@
     </EmbeddedNativeLibrary>
     <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\openal-soft\libs\x86_64\libopenal32.so">
       <Link>libs\x86_64\libopenal32.so</Link>
-    </EmbeddedNativeLibrary>
-
-    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\arm64-v8a\libswappy.so">
-      <Link>libs\arm64-v8a\libswappy.so</Link>
-    </EmbeddedNativeLibrary>
-    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\armeabi-v7a\libswappy.so">
-      <Link>libs\armeabi-v7a\libswappy.so</Link>
-    </EmbeddedNativeLibrary>
-    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86\libswappy.so">
-      <Link>libs\x86\libswappy.so</Link>
-    </EmbeddedNativeLibrary>
-    <EmbeddedNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\x86_64\libswappy.so">
-      <Link>libs\x86_64\libswappy.so</Link>
     </EmbeddedNativeLibrary>
 
     <AndroidNativeLibrary Include="..\ThirdParty\Dependencies\SwappyGL\libs\arm64-v8a\libNativeHelper.so">

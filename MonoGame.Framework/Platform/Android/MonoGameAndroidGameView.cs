@@ -94,13 +94,38 @@ namespace Microsoft.Xna.Framework
 
         private static void LoadHelperLibrary()
         {
-            Java.Lang.JavaSystem.LoadLibrary(HelperLibraryName);
+            Java.Lang.JavaSystem.LoadLibrary(HelperLibraryName); 
         }
 
         [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_MyMathFuncsAdd")] // test
         public static extern int MyMathFuncsAdd(IntPtr env, IntPtr thiz, int a, int b);
+
         [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_GetNativeWindow")]
         public static extern IntPtr GetNativeWindow(IntPtr env, IntPtr thiz, IntPtr surface);
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLInit")]
+        public static extern bool SwappyGLInit(IntPtr env, IntPtr thiz, IntPtr activity);
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLIsEnabled")]
+        public static extern bool SwappyGLIsEnabled();
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLDestroy")]
+        public static extern void SwappyGLDestroy();
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLSetWindow")]
+        public static extern bool SwappyGLSetWindow(IntPtr env, IntPtr thiz, IntPtr window);
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLSwap")]
+        public static extern bool SwappyGLSwap(IntPtr env, IntPtr thiz, IntPtr display, IntPtr surface);
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLSetUseAffinity")]
+        public static extern void SwappyGLSetUseAffinity(IntPtr env, IntPtr thiz, bool enabled);
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLSetAutoSwapInterval")]
+        public static extern void SwappyGLSetAutoSwapInterval(IntPtr env, IntPtr thiz, bool enabled);
+
+        [DllImport(HelperLibraryName, EntryPoint = "Java_crc64493ac3851fab1842_MonoGameAndroidGameView_SwappyGLSetAutoPipelineMode")]
+        public static extern void SwappyGLSetAutoPipelineMode(IntPtr env, IntPtr thiz, bool enabled);
 
         public MonoGameAndroidGameView(Context context, AndroidGameWindow gameWindow, Game game)
             : base(context)
@@ -123,13 +148,14 @@ namespace Microsoft.Xna.Framework
             {
                 LoadHelperLibrary();
 
-                SwappyGL.Init(JNIEnv.Handle, Game.Activity.Handle);
-                //SwappyGL.SetAutoSwapInterval(true);
-                //SwappyGL.SetAutoPipelineMode(true);
-                SwappyGLEnabled = SwappyGL.IsEnabled();
+                bool result = SwappyGLInit(JNIEnv.Handle, System.IntPtr.Zero, Game.Activity.Handle);
+                bool enabled = SwappyGLIsEnabled();
+
+                SwappyGLEnabled = result && enabled;
             }
             catch (System.Exception e)
             {
+                Console.WriteLine(e.Message);
                 SwappyGLEnabled = false;
             }
         }
@@ -179,7 +205,7 @@ namespace Microsoft.Xna.Framework
         {
             EnsureUndisposed();
 
-            bool swapResult = SwappyGLEnabled ? SwappyGL.SwapBuffers(eglDisplayNative, eglSurfaceNative) : egl.EglSwapBuffers(eglDisplay, eglSurface);
+            bool swapResult = SwappyGLEnabled ? SwappyGLSwap(JNIEnv.Handle, System.IntPtr.Zero, eglDisplayNative, eglSurfaceNative) : egl.EglSwapBuffers(eglDisplay, eglSurface);
 
             if (!swapResult)
             {
@@ -1091,13 +1117,19 @@ namespace Microsoft.Xna.Framework
                     {
                         try
                         {
-                            //int c = MyMathFuncsAdd(JNIEnv.Handle, System.IntPtr.Zero, 3, 2); // test
-
                             var surface = Java.Interop.JniEnvironment.References.NewReturnToJniRef(this.Holder.Surface);
                             IntPtr window = GetNativeWindow(JNIEnv.Handle, System.IntPtr.Zero, surface);
-                            bool result = SwappyGL.SetWindow(window);
+                            bool result = SwappyGLSetWindow(JNIEnv.Handle, System.IntPtr.Zero, window);
                             if (result)
-                                SwappyGL.SetAutoSwapInterval(true);
+                            {
+                                SwappyGLSetAutoSwapInterval(JNIEnv.Handle, System.IntPtr.Zero, true);
+                                SwappyGLSetAutoPipelineMode(JNIEnv.Handle, System.IntPtr.Zero, true);
+                                SwappyGLSetUseAffinity(JNIEnv.Handle, System.IntPtr.Zero, true);
+                            }
+                            else
+                            {
+                                SwappyGLEnabled = false;
+                            }
                         }
                         catch (Exception e)
                         {
