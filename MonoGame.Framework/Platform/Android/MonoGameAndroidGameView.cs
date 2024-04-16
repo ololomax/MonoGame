@@ -1124,7 +1124,7 @@ namespace Microsoft.Xna.Framework
                             {
                                 SwappyGLSetAutoSwapInterval(JNIEnv.Handle, System.IntPtr.Zero, true);
                                 SwappyGLSetAutoPipelineMode(JNIEnv.Handle, System.IntPtr.Zero, true);
-                                SwappyGLSetUseAffinity(JNIEnv.Handle, System.IntPtr.Zero, true);
+                                SwappyGLSetUseAffinity(JNIEnv.Handle, System.IntPtr.Zero, false);
                             }
                             else
                             {
