@@ -125,7 +125,7 @@
 
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.7" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.1" />
   </ItemGroup>
   <Import Project="Platform\OpenGL.targets" />
   <Import Project="Platform\OpenAL.targets" />
