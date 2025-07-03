@@ -172,11 +172,11 @@ namespace Microsoft.Xna.Framework
         /// The value is a 32-bit unsigned integer, with R in the least significant octet.
         /// </summary>
         /// <param name="packedValue">The packed value.</param>
-        [CLSCompliant(false)]
         public Color(uint packedValue)
         {
             _packedValue = packedValue;
         }
+
 
         /// <summary>
         /// Constructs an RGBA color from the XYZW unit length components of a vector.
@@ -386,8 +386,18 @@ namespace Microsoft.Xna.Framework
                 this._packedValue = (this._packedValue & 0x00ffffff) | ((uint)value << 24);
             }
         }
-		
-	/// <summary>
+
+        /// <summary>
+        /// Converts a <see cref="System.Numerics.Vector4"/> to a <see cref="Vector4"/> by mapping XYZW -> RGBA.
+        /// </summary>
+        /// <param name="value">The converted value.</param>
+        /// <returns></returns>
+        public static implicit operator Color(System.Numerics.Vector4 value)
+        {
+            return new Color(value.X, value.Y, value.Z, value.W);
+        }
+
+	    /// <summary>
         /// Compares whether two <see cref="Color"/> instances are equal.
         /// </summary>
         /// <param name="a"><see cref="Color"/> instance on the left of the equal sign.</param>
@@ -1738,34 +1748,67 @@ namespace Microsoft.Xna.Framework
                 (int)MathHelper.LerpPrecise(value1.B, value2.B, amount),
                 (int)MathHelper.LerpPrecise(value1.A, value2.A, amount));
         }
-		
-	    /// <summary>
-        /// Multiply <see cref="Color"/> by value.
+
+        /// <summary>
+        /// Multiplies the RGBA component values of a color by the specified value.
         /// </summary>
-        /// <param name="value">Source <see cref="Color"/>.</param>
-        /// <param name="scale">Multiplicator.</param>
-        /// <returns>Multiplication result.</returns>
-	    public static Color Multiply(Color value, float scale)
+        /// <param name="value">The source color value to multiply.</param>
+        /// <param name="scale">The value to multiply the RGBA component values by.</param>
+        /// <returns>The new color value created as a result of the multiplication.</returns>
+        public static Color Multiply(Color value, float scale)
 	    {
 	        return new Color((int)(value.R * scale), (int)(value.G * scale), (int)(value.B * scale), (int)(value.A * scale));
 	    }
+
+        /// <summary>
+        /// Multiplies the Alpha component value of a color by the specified value.
+        /// </summary>
+        /// <param name="value">The source color value to multiply.</param>
+        /// <param name="scale">The value to multiply the Alpha component value by.</param>
+        /// <returns>The new color value created as a result of the multiplication.</returns>
+        public static Color MultiplyAlpha(Color value, float scale)
+	    {
+	        return new Color(value.R, value.G, value.B, (int)(value.A * scale));
+	    }
 	
 	    /// <summary>
-        /// Multiply <see cref="Color"/> by value.
+        /// Multiplies the RGBA component values of a color by the specified value.
         /// </summary>
-        /// <param name="value">Source <see cref="Color"/>.</param>
-        /// <param name="scale">Multiplicator.</param>
-        /// <returns>Multiplication result.</returns>
+        /// <param name="value">The source color value to multiply.</param>
+        /// <param name="scale">The value to multiply the RGBA component values by.</param>
+        /// <returns>The new color value created as a result of the multiplication.</returns>
 	    public static Color operator *(Color value, float scale)
         {
             return new Color((int)(value.R * scale), (int)(value.G * scale), (int)(value.B * scale), (int)(value.A * scale));
         }
 
+        /// <summary>
+        /// Multiplies the RGBA component values of a color by the specified value.
+        /// </summary>
+        /// <param name="scale">The value to multiply the RGBA component values by.</param>
+        /// <param name="value">The source color value to multiply.</param>
+        /// <returns>The new color value created as a result of the multiplication.</returns>
         public static Color operator *(float scale, Color value)
         {
             return new Color((int)(value.R * scale), (int)(value.G * scale), (int)(value.B * scale), (int)(value.A * scale));
         }
 
+        /// <summary>
+        /// Multiplies two colors compenent-wise.
+        /// </summary>
+        /// <param name="color1">The first color to be multiplied.</param>
+        /// <param name="color2">The second color to be multiplied.</param>
+        /// <returns>The new color value created as a result of the multiplication.</returns>
+        public static Color operator *(Color color1, Color color2)
+        {
+            return new Color(
+                (color1.R * color2.R) / 255,
+                (color1.G * color2.G) / 255,
+                (color1.B * color2.B) / 255,
+                (color1.A * color2.A) / 255
+            );
+        }
+        
         /// <summary>
         /// Gets a <see cref="Vector3"/> representation for this object.
         /// </summary>
@@ -1787,7 +1830,6 @@ namespace Microsoft.Xna.Framework
         /// <summary>
         /// Gets or sets packed value of this <see cref="Color"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public UInt32 PackedValue
         {
             get { return _packedValue; }
@@ -1920,6 +1962,44 @@ namespace Microsoft.Xna.Framework
             g = G / 255f;
             b = B / 255f;
             a = A / 255f;
+        }
+        
+        /// <summary>
+        /// Converts <see cref="Color"/> into HSVL components.
+        /// </summary>
+        /// <param name="h">Hue component from 0.0f to 360.0f.</param>
+        /// <param name="s">Saturation component from 0.0f to 1.0f.</param>
+        /// <param name="v">Value component from 0.0f to 1.0f.</param>
+        /// <param name="l">Luminosity (or brightness) component from 0.0f to 1.0f.</param>
+        public void ToHSVL(out float h, out float s, out float v, out float l)
+        {
+            double r = R / 255.0;
+            double g = G / 255.0;
+            double b = B / 255.0;
+
+            double max = Math.Max(r, Math.Max(g, b));
+            double min = Math.Min(r, Math.Min(g, b));
+            double delta = max - min;
+
+            // hue
+            h = 0.0f;
+            if (max == r)
+                h = (float)((60.0 * ((g - b) / delta) + 360.0) % 360.0);
+            else if (max == g)
+                h = (float)((60.0 * ((b - r) / delta) + 360.0) % 360.0);
+            else if (max == b)
+                h = (float)((60.0 * ((r - g) / delta) + 360.0) % 360.0);
+
+            // saturation
+            s = 0.0f;
+            if (max != 0.0)
+                s = (float)((delta / max) * 100.0);
+
+            // value
+            v = (float)(max * 100.0);
+
+            // luminosity
+            l = (float)((max + min) / 2.0);
         }
     }
 }
