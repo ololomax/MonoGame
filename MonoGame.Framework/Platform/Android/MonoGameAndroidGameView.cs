@@ -1,10 +1,9 @@
-// MonoGame - Copyright (C) The MonoGame Team
+// MonoGame - Copyright (C) MonoGame Foundation, Inc
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
@@ -16,11 +15,9 @@ using Javax.Microedition.Khronos.Egl;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
-using MonoGame.OpenGL;
 
 namespace Microsoft.Xna.Framework
 {
-    [CLSCompliant(false)]
     public class MonoGameAndroidGameView : SurfaceView, ISurfaceHolderCallback, View.IOnTouchListener
     {
         // What is the state of the app, for tracking surface recreation inside this class.
@@ -142,7 +139,9 @@ namespace Microsoft.Xna.Framework
             mHolder = Holder;
             // Add callback to get the SurfaceCreated etc events
             mHolder.AddCallback(this);
+#pragma warning disable CS0618
             mHolder.SetType(SurfaceType.Gpu);
+#pragma warning restore CS0618
 
             try
             {
@@ -162,7 +161,7 @@ namespace Microsoft.Xna.Framework
 
         public void SurfaceChanged(ISurfaceHolder holder, global::Android.Graphics.Format format, int width, int height)
         {
-            // Set flag to recreate gl surface or rendering can be bad on orienation change or if app 
+            // Set flag to recreate gl surface or rendering can be bad on orientation change or if app 
             // is closed in one orientation and re-opened in another.
             lock (_lockObject)
             {
@@ -233,8 +232,8 @@ namespace Microsoft.Xna.Framework
         public virtual void ClearCurrent()
         {
             EnsureUndisposed();
-            if (!egl.EglMakeCurrent(eglDisplay, EGL10.EglNoSurface,
-                EGL10.EglNoSurface, EGL10.EglNoContext))
+            if (!egl.EglMakeCurrent(eglDisplay, IEGL10.EglNoSurface,
+                IEGL10.EglNoSurface, IEGL10.EglNoContext))
             {
                 System.Diagnostics.Debug.WriteLine("Error Clearing Current" + GetErrorAsString());
             }
@@ -452,7 +451,7 @@ namespace Microsoft.Xna.Framework
 
         void processStateRunning(CancellationToken token)
         {
-            // do not run game if surface is not avalible
+            // do not run game if surface is not available
             lock (_lockObject)
             {
                 if (!androidSurfaceAvailable)
@@ -480,7 +479,7 @@ namespace Microsoft.Xna.Framework
             }
             catch (MonoGameGLException ex)
             {
-                Log.Error("AndroidGameView", "GL Exception occured during RunIteration {0}", ex.Message);
+                Log.Error("AndroidGameView", "GL Exception occurred during RunIteration {0}", ex.Message);
             }
 
             if (updates > 0)
@@ -543,7 +542,7 @@ namespace Microsoft.Xna.Framework
                 if (!androidSurfaceAvailable)
                     return;
 
-                // create surface if context is avalible
+                // create surface if context is available
                 if (glContextAvailable && !lostglContext)
                 {
                     try
@@ -557,7 +556,7 @@ namespace Microsoft.Xna.Framework
                     }
                 }
 
-                // create context if not avalible
+                // create context if not available
                 if ((!glContextAvailable || lostglContext))
                 {
                     // Start or Restart due to context loss
@@ -832,10 +831,10 @@ namespace Microsoft.Xna.Framework
 
         protected void DestroyGLSurface()
         {
-            if (!(eglSurface == null || eglSurface == EGL10.EglNoSurface))
+            if (!(eglSurface == null || eglSurface == IEGL10.EglNoSurface))
             {
-                if (!egl.EglMakeCurrent(eglDisplay, EGL10.EglNoSurface,
-                        EGL10.EglNoSurface, EGL10.EglNoContext))
+                if (!egl.EglMakeCurrent(eglDisplay, IEGL10.EglNoSurface,
+                        IEGL10.EglNoSurface, IEGL10.EglNoContext))
                 {
                     Log.Verbose("AndroidGameView", "Could not unbind EGL surface" + GetErrorAsString());
                 }
@@ -866,47 +865,47 @@ namespace Microsoft.Xna.Framework
                 List<int> attribs = new List<int>();
                 if (Red != 0)
                 {
-                    attribs.Add(EGL11.EglRedSize);
+                    attribs.Add(IEGL11.EglRedSize);
                     attribs.Add(Red);
                 }
                 if (Green != 0)
                 {
-                    attribs.Add(EGL11.EglGreenSize);
+                    attribs.Add(IEGL11.EglGreenSize);
                     attribs.Add(Green);
                 }
                 if (Blue != 0)
                 {
-                    attribs.Add(EGL11.EglBlueSize);
+                    attribs.Add(IEGL11.EglBlueSize);
                     attribs.Add(Blue);
                 }
                 if (Alpha != 0)
                 {
-                    attribs.Add(EGL11.EglAlphaSize);
+                    attribs.Add(IEGL11.EglAlphaSize);
                     attribs.Add(Alpha);
                 }
                 if (Depth != 0)
                 {
-                    attribs.Add(EGL11.EglDepthSize);
+                    attribs.Add(IEGL11.EglDepthSize);
                     attribs.Add(Depth);
                 }
                 if (Stencil != 0)
                 {
-                    attribs.Add(EGL11.EglStencilSize);
+                    attribs.Add(IEGL11.EglStencilSize);
                     attribs.Add(Stencil);
                 }
                 if (SampleBuffers != 0)
                 {
-                    attribs.Add(EGL11.EglSampleBuffers);
+                    attribs.Add(IEGL11.EglSampleBuffers);
                     attribs.Add(SampleBuffers);
                 }
                 if (Samples != 0)
                 {
-                    attribs.Add(EGL11.EglSamples);
+                    attribs.Add(IEGL11.EglSamples);
                     attribs.Add(Samples);
                 }
-                attribs.Add(EGL11.EglRenderableType);
+                attribs.Add(IEGL11.EglRenderableType);
                 attribs.Add(4);
-                attribs.Add(EGL11.EglNone);
+                attribs.Add(IEGL11.EglNone);
 
                 return attribs.ToArray();
             }
@@ -922,14 +921,14 @@ namespace Microsoft.Xna.Framework
             {
                 return new SurfaceConfig()
                 {
-                    Red = GetAttribute(config, egl, eglDisplay, EGL11.EglRedSize),
-                    Green = GetAttribute(config, egl, eglDisplay, EGL11.EglGreenSize),
-                    Blue = GetAttribute(config, egl, eglDisplay, EGL11.EglBlueSize),
-                    Alpha = GetAttribute(config, egl, eglDisplay, EGL11.EglAlphaSize),
-                    Depth = GetAttribute(config, egl, eglDisplay, EGL11.EglDepthSize),
-                    Stencil = GetAttribute(config, egl, eglDisplay, EGL11.EglStencilSize),
-                    SampleBuffers = GetAttribute(config, egl, eglDisplay, EGL11.EglSampleBuffers),
-                    Samples = GetAttribute(config, egl, eglDisplay, EGL11.EglSamples)
+                    Red = GetAttribute(config, egl, eglDisplay, IEGL11.EglRedSize),
+                    Green = GetAttribute(config, egl, eglDisplay, IEGL11.EglGreenSize),
+                    Blue = GetAttribute(config, egl, eglDisplay, IEGL11.EglBlueSize),
+                    Alpha = GetAttribute(config, egl, eglDisplay, IEGL11.EglAlphaSize),
+                    Depth = GetAttribute(config, egl, eglDisplay, IEGL11.EglDepthSize),
+                    Stencil = GetAttribute(config, egl, eglDisplay, IEGL11.EglStencilSize),
+                    SampleBuffers = GetAttribute(config, egl, eglDisplay, IEGL11.EglSampleBuffers),
+                    Samples = GetAttribute(config, egl, eglDisplay, IEGL11.EglSamples)
                 };
             }
 
@@ -945,8 +944,8 @@ namespace Microsoft.Xna.Framework
 
             egl = EGLContext.EGL.JavaCast<IEGL10>();
 
-            eglDisplay = egl.EglGetDisplay(EGL10.EglDefaultDisplay);
-            if (eglDisplay == EGL10.EglNoDisplay)
+            eglDisplay = egl.EglGetDisplay(IEGL10.EglDefaultDisplay);
+            if (eglDisplay == IEGL10.EglNoDisplay)
                 throw new Exception("Could not get EGL display" + GetErrorAsString());
 
             int[] version = new int[2];
@@ -1037,17 +1036,17 @@ namespace Microsoft.Xna.Framework
             var createdVersion = new MonoGame.OpenGL.GLESVersion();
             foreach (var v in MonoGame.OpenGL.GLESVersion.GetSupportedGLESVersions ()) {
                 Log.Verbose("AndroidGameView", "Creating GLES {0} Context", v);
-                eglContext = egl.EglCreateContext(eglDisplay, results[0], EGL10.EglNoContext, v.GetAttributes());
-                if (eglContext == null || eglContext == EGL10.EglNoContext)
+                eglContext = egl.EglCreateContext(eglDisplay, results[0], IEGL10.EglNoContext, v.GetAttributes());
+                if (eglContext == null || eglContext == IEGL10.EglNoContext)
                 {
                     Log.Verbose("AndroidGameView", string.Format("GLES {0} Not Supported. {1}", v, GetErrorAsString()));
-                    eglContext = EGL10.EglNoContext;
+                    eglContext = IEGL10.EglNoContext;
                     continue;
                 }
                 createdVersion = v;
                 break;
             }
-            if (eglContext == null || eglContext == EGL10.EglNoContext)
+            if (eglContext == null || eglContext == IEGL10.EglNoContext)
             {
                 eglContext = null;
                 throw new Exception("Could not create EGL context" + GetErrorAsString());
@@ -1061,35 +1060,35 @@ namespace Microsoft.Xna.Framework
         {
             switch (egl.EglGetError())
             {
-                case EGL10.EglSuccess:
+                case IEGL10.EglSuccess:
                     return "Success";
 
-                case EGL10.EglNotInitialized:
+                case IEGL10.EglNotInitialized:
                     return "Not Initialized";
 
-                case EGL10.EglBadAccess:
+                case IEGL10.EglBadAccess:
                     return "Bad Access";
-                case EGL10.EglBadAlloc:
+                case IEGL10.EglBadAlloc:
                     return "Bad Allocation";
-                case EGL10.EglBadAttribute:
+                case IEGL10.EglBadAttribute:
                     return "Bad Attribute";
-                case EGL10.EglBadConfig:
+                case IEGL10.EglBadConfig:
                     return "Bad Config";
-                case EGL10.EglBadContext:
+                case IEGL10.EglBadContext:
                     return "Bad Context";
-                case EGL10.EglBadCurrentSurface:
+                case IEGL10.EglBadCurrentSurface:
                     return "Bad Current Surface";
-                case EGL10.EglBadDisplay:
+                case IEGL10.EglBadDisplay:
                     return "Bad Display";
-                case EGL10.EglBadMatch:
+                case IEGL10.EglBadMatch:
                     return "Bad Match";
-                case EGL10.EglBadNativePixmap:
+                case IEGL10.EglBadNativePixmap:
                     return "Bad Native Pixmap";
-                case EGL10.EglBadNativeWindow:
+                case IEGL10.EglBadNativeWindow:
                     return "Bad Native Window";
-                case EGL10.EglBadParameter:
+                case IEGL10.EglBadParameter:
                     return "Bad Parameter";
-                case EGL10.EglBadSurface:
+                case IEGL10.EglBadSurface:
                     return "Bad Surface";
 
                 default:
@@ -1107,7 +1106,7 @@ namespace Microsoft.Xna.Framework
                     DestroyGLSurface();
 
                     eglSurface = egl.EglCreateWindowSurface(eglDisplay, eglConfig, (Java.Lang.Object)this.Holder, null);
-                    if (eglSurface == null || eglSurface == EGL10.EglNoSurface)
+                    if (eglSurface == null || eglSurface == IEGL10.EglNoSurface)
                         throw new Exception("Could not create EGL window surface" + GetErrorAsString());
 
                     if (!egl.EglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext))
@@ -1162,7 +1161,7 @@ namespace Microsoft.Xna.Framework
         {
             IEGL10 egl = EGLContext.EGL.JavaCast<IEGL10>();
             EGLSurface result = egl.EglCreatePbufferSurface(eglDisplay, config, attribList);
-            if (result == null || result == EGL10.EglNoSurface)
+            if (result == null || result == IEGL10.EglNoSurface)
                 throw new Exception("EglCreatePBufferSurface");
             return result;
         }
@@ -1237,15 +1236,30 @@ namespace Microsoft.Xna.Framework
 
         #region Key and Motion
 
+        private bool IsKeyboard(InputDevice device)
+        {
+            if (device == null)
+                return false;
+            var sources = device.Sources;
+            return (sources & InputSourceType.Keyboard) == InputSourceType.Keyboard && device.VendorId != 0 && device.ProductId != 0;
+        }
+
+        private bool IsGamePad(InputDevice device) {
+            if (device == null)
+                return false;
+            var sources = device.Sources;
+            return ((sources & InputSourceType.Gamepad) == InputSourceType.Gamepad || (sources & InputSourceType.Joystick) == InputSourceType.Joystick) && device.VendorId != 0 && device.ProductId != 0 ;
+        }
+
         public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
         {
             bool handled = false;
-            if (GamePad.OnKeyDown(keyCode, e))
+            if (IsGamePad (e.Device) && GamePad.OnKeyDown(keyCode, e))
                 return true;
 
-            handled = Keyboard.KeyDown(keyCode);
+            handled = IsKeyboard (e.Device) && Keyboard.KeyDown(keyCode);
 
-            // we need to handle the Back key here because it doesnt work any other way
+            // we need to handle the Back key here because it doesn't work any other way
             if (keyCode == Keycode.Back)
             {
                 GamePad.Back = true;
@@ -1273,14 +1287,14 @@ namespace Microsoft.Xna.Framework
         {
             if (keyCode == Keycode.Back)
                 GamePad.Back = false;
-            if (GamePad.OnKeyUp(keyCode, e))
+            if (IsGamePad (e.Device) && GamePad.OnKeyUp(keyCode, e))
                 return true;
-            return Keyboard.KeyUp(keyCode);
+            return IsKeyboard (e.Device) && Keyboard.KeyUp(keyCode);
         }
 
         public override bool OnGenericMotionEvent(MotionEvent e)
         {
-            if (GamePad.OnGenericMotionEvent(e))
+            if (IsGamePad (e.Device) && GamePad.OnGenericMotionEvent(e))
                 return true;
 
             return base.OnGenericMotionEvent(e);
@@ -1397,21 +1411,21 @@ namespace Microsoft.Xna.Framework
                 this.view = view;
                 foreach (var v in MonoGame.OpenGL.GLESVersion.GetSupportedGLESVersions())
                 {
-                    eglContext = view.egl.EglCreateContext(view.eglDisplay, view.eglConfig, EGL10.EglNoContext, v.GetAttributes());
-                    if (eglContext == null || eglContext == EGL10.EglNoContext)
+                    eglContext = view.egl.EglCreateContext(view.eglDisplay, view.eglConfig, IEGL10.EglNoContext, v.GetAttributes());
+                    if (eglContext == null || eglContext == IEGL10.EglNoContext)
                     {
                         continue;
                     }
                     break;
                 }
-                if (eglContext == null || eglContext == EGL10.EglNoContext)
+                if (eglContext == null || eglContext == IEGL10.EglNoContext)
                 {
                     eglContext = null;
                     throw new Exception("Could not create EGL context" + view.GetErrorAsString());
                 }
-                int[] pbufferAttribList = new int[] { EGL10.EglWidth, 64, EGL10.EglHeight, 64, EGL10.EglNone };
+                int[] pbufferAttribList = new int[] { IEGL10.EglWidth, 64, IEGL10.EglHeight, 64, IEGL10.EglNone };
                 surface = view.CreatePBufferSurface(view.eglConfig, pbufferAttribList);
-                if (surface == EGL10.EglNoSurface)
+                if (surface == IEGL10.EglNoSurface)
                     throw new Exception("Could not create Pbuffer Surface" + view.GetErrorAsString());
             }
 

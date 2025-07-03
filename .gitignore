@@ -44,6 +44,7 @@ project.lock.json
 /MonoGame.Framework/MonoGame.Framework.Net.WindowsUniversal.project.lock.json
 /MonoGame.Framework/MonoGame.Framework.WindowsUniversal.project.lock.json
 artifacts/
+Artifacts/
 Resource.Designer.cs
 
 # JetBrains Rider
@@ -88,6 +89,10 @@ IDE/MonoDevelop/MonoDevelop.MonoGame/templates/Common/MonoGame.Framework.dll.con
 
 # CAKE
 .cake/**
+
+# Xmake
+.xmake
+vsxmake2022
 
 # docfx
 _*

@@ -1,4 +1,4 @@
-// MonoGame - Copyright (C) The MonoGame Team
+// MonoGame - Copyright (C) MonoGame Foundation, Inc
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
@@ -12,7 +12,6 @@ using AndroidX.AppCompat.App;
 
 namespace Microsoft.Xna.Framework
 {
-	[CLSCompliant(false)]
     public class AndroidGameActivity : AppCompatActivity
     {
         internal Game Game { private get; set; }
@@ -21,7 +20,7 @@ namespace Microsoft.Xna.Framework
         private OrientationListener _orientationListener;
 
         public bool AutoPauseAndResumeMediaPlayer = true;
-        public bool RenderOnUIThread = true;
+        public bool RenderOnUIThread = true; 
 
         /// <summary>
         /// OnCreate called when the activity is launched from cold or after the app
@@ -95,7 +94,6 @@ namespace Microsoft.Xna.Framework
 		}
     }
 
-	[CLSCompliant(false)]
 	public static class ActivityExtensions
     {
         public static ActivityAttribute GetActivityAttribute(this AndroidGameActivity obj)
