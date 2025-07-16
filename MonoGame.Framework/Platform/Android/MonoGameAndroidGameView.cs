@@ -1149,7 +1149,7 @@ namespace Microsoft.Xna.Framework
                         MonoGame.OpenGL.GL.LoadEntryPoints();
 
                     eglDisplayNative = GL.GetCurrenDisplay();
-                    eglSurfaceNative = GL.GetCurrentSurface(EGL10.EglDraw);
+                    eglSurfaceNative = GL.GetCurrentSurface(IEGL10.EglDraw);
                 }
                 catch (Exception ex)
                 {
