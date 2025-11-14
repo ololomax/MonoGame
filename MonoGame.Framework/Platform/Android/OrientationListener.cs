@@ -40,6 +40,10 @@ namespace Microsoft.Xna.Framework
             {
                 // Do nothing (or log warning?). In case android API or Xamarin do not support this Android system property.
             }
+            catch (Java.Lang.Exception)
+            {
+                // other exception
+            }
 
             var disporientation = AndroidCompatibility.GetAbsoluteOrientation(orientation);
 
