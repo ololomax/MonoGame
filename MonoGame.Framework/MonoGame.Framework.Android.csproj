@@ -114,7 +114,7 @@
     </AndroidNativeLibrary>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.1" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.3" />
   </ItemGroup>
   <Import Project="Platform\OpenGL.targets" />
   <Import Project="Platform\OpenAL.targets" />
